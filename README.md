@@ -5,8 +5,14 @@ Dominio di destinazione: **radixinnovationstudio.com** (Namecheap).
 
 ## Cosa c'è dentro
 
-- `index.html` — l'intera pagina (one-page site: hero, approccio, per chi lavoriamo, competenze, metodo, progetti, brand moment, contatti, footer)
+- `index.html` — la homepage (hero, approccio, per chi lavoriamo, competenze, metodo, progetti, brand moment, contatti, footer)
+- `chi-siamo.html` — pagina dedicata: la storia di RADIX/Francesco Ilari e i quattro principi di come lavora lo studio
+- `servizi.html` — approfondimento delle tre competenze (Venture Building, AI & Apps, Marketing): cosa fanno, per chi sono, come si articolano, più FAQ
+- `progetti.html` — versione estesa della sezione Progetti: il caso RADIX Agentic Platform (problema, cosa fa oggi, prossimi passi dichiarati) e spazio per i prossimi
+- `contatti.html` — pagina di contatto standalone: stesso modulo mailto della homepage, più "come iniziamo a lavorare insieme" e una FAQ
 - `assets/` — le immagini usate nel sito (logo, foto/mockup della sezione hero e approccio, sfondo del "brand moment", watermark contatti)
+
+Le 4 pagine nuove condividono lo stesso sistema di design della homepage (colori, font, nav, footer, animazioni) — sono file HTML autonomi come `index.html`, nessun framework, facili da modificare a mano. Il menu della homepage ora punta a queste pagine per Servizi/Progetti/Contatti ed è stata aggiunta la voce Chi siamo; "Il nostro approccio" e "Metodo" restano ancore sulla homepage.
 
 Il modulo di contatto in fondo alla pagina non invia dati a nessun server: apre il client email dell'utente con oggetto e corpo già compilati (`mailto:`), quindi non serve alcun backend per farlo funzionare.
 
