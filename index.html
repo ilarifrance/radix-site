@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RADIX — Venture & Innovation Studio</title>
+<meta name="description" content="RADIX è uno studio che sviluppa nuove iniziative imprenditoriali, costruisce prodotti digitali basati sull'intelligenza artificiale e mette competenze di marketing e tecnologia al servizio della crescita.">
+<meta property="og:title" content="RADIX — Venture & Innovation Studio">
+<meta property="og:description" content="Dalle idee, imprese. Venture building, AI &amp; Apps, Marketing.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="/assets/brand-moment-bg.png">
+<link rel="icon" href="/assets/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+
+  body{ margin:0; font-family:'Inter',system-ui,sans-serif; background:#FAF9F6; overflow-x:hidden; }
+  a{ color:#6B7F72; text-decoration:none; }
+  a:hover{ color:#0F2D24; }
+  h1,h2,h3{ font-family:'Montserrat',system-ui,sans-serif; margin:0; }
+
+  @keyframes fadeUp{ from{ opacity:0; transform:translateY(22px); } to{ opacity:1; transform:translateY(0); } }
+  @keyframes floatY{ 0%,100%{ transform:translateY(0px); } 50%{ transform:translateY(-14px); } }
+  @keyframes marquee{ from{ transform:translateX(0); } to{ transform:translateX(-50%); } }
+  @keyframes glowPulse{ 0%,100%{ opacity:0.55; } 50%{ opacity:1; } }
+  @keyframes spin{ to{ transform:rotate(360deg); } }
+  @keyframes pulseRing{ 0%,100%{ transform:scale(1); } 50%{ transform:scale(1.06); } }
+
+  .reveal{ opacity:0; animation:fadeUp 0.9s cubic-bezier(.2,.7,.2,1) forwards; }
+  .float{ animation:floatY 5.5s ease-in-out infinite; }
+  .marquee-track{ display:flex; width:max-content; animation:marquee 26s linear infinite; }
+  .spin-slow{ animation:spin 16s linear infinite; }
+
+  .reveal-section{ opacity:0; transform:translateY(36px); transition:opacity .9s cubic-bezier(.2,.7,.2,1), transform .9s cubic-bezier(.2,.7,.2,1); }
+  .reveal-section.is-visible{ opacity:1; transform:translateY(0); }
+  .reveal-child{ opacity:0; transform:translateY(24px); transition:opacity .7s ease, transform .7s ease; }
+  .is-visible .reveal-child{ opacity:1; transform:translateY(0); }
+  .is-visible .reveal-child:nth-child(2){ transition-delay:.1s; }
+  .is-visible .reveal-child:nth-child(3){ transition-delay:.2s; }
+  .is-visible .reveal-child:nth-child(4){ transition-delay:.3s; }
+
+  .grain{ position:fixed; inset:0; z-index:9999; pointer-events:none; opacity:0.05; mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+
+  /* Barra di avanzamento dello scroll — funzionale, non decorativa: resta anche con le
+     animazioni ridotte. */
+  .scroll-progress{ position:fixed; top:0; left:0; height:3px; width:0%; z-index:70;
+    background:linear-gradient(90deg,#6B7F72,#EDE6DE); box-shadow:0 0 12px rgba(107,127,114,0.55); }
+
+  .cta-primary{ display:inline-flex; align-items:center; gap:10px; background:linear-gradient(155deg,#ffffff,#EDE6DE); color:#0F2D24; font-weight:700; font-size:15px; padding:16px 30px; border-radius:10px; box-shadow:0 10px 28px rgba(0,0,0,0.38); transition:transform .2s ease, box-shadow .2s ease; font-family:inherit; }
+  .cta-primary:hover{ transform:translateY(-3px); box-shadow:0 16px 34px rgba(0,0,0,0.46); }
+  .cta-ghost{ display:inline-flex; align-items:center; gap:8px; color:#EDE6DE; font-size:15px; font-weight:600; padding:15px 26px; border-radius:10px; border:1px solid rgba(237,230,222,0.35); transition:border-color .2s ease, background .2s ease; }
+  .cta-ghost:hover{ border-color:rgba(237,230,222,0.8); background:rgba(237,230,222,0.06); }
+  .fixed-cta{ position:fixed; right:26px; bottom:26px; z-index:60; width:60px; height:60px; border-radius:50%;
+    background:linear-gradient(155deg,#ffffff,#EDE6DE); display:flex; align-items:center; justify-content:center;
+    box-shadow:0 14px 30px rgba(15,45,36,0.35); transition:transform .2s ease; animation:pulseRing 3.4s ease-in-out infinite; }
+  .fixed-cta:hover{ transform:scale(1.1); }
+
+  .card{ background:#ffffff; border:1px solid rgba(15,45,36,0.10); border-radius:18px; padding:38px 32px; transition:transform .25s ease, box-shadow .25s ease, border-color .25s ease; }
+  .card:hover{ transform:translateY(-6px); box-shadow:0 20px 44px rgba(15,45,36,0.14); border-color:rgba(107,127,114,0.4); }
+  .card .card-num{ font-family:'Montserrat',sans-serif; font-weight:800; font-size:12.5px; letter-spacing:0.1em; color:#6B7F72; }
+
+  .step{ transition:transform .25s ease; }
+  .step:hover{ transform:translateY(-4px); }
+
+  .navlink{ font-size:13px; font-weight:600; color:#cdd6d0; white-space:nowrap; }
+  .navlink:hover{ color:#FAF9F6; }
+
+  .kinetic-line{ display:inline-block; }
+  .kinetic-1{ transform:rotate(-1.4deg); }
+  .kinetic-2{ transform:rotate(1deg); margin-left:22px; }
+  .kinetic-3{ transform:rotate(-0.8deg); }
+
+  .servizi-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-top:44px; }
+  .metodo-grid{ display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; margin-top:22px; }
+  .metodo-line{ display:flex; align-items:center; margin-top:40px; }
+  .metodo-note{ font-size:13px; color:#8a958f; margin-top:34px; max-width:520px; line-height:1.6; }
+
+  .audience-grid{ display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-top:34px; }
+  .audience-item{ padding:26px 24px; border:1px solid rgba(15,45,36,0.12); border-radius:16px; background:#FAF9F6; }
+
+  .projects-grid{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px; margin-top:40px; }
+  .project-card{ background:#ffffff; border:1px solid rgba(15,45,36,0.10); border-radius:18px; padding:32px; }
+  .status-pill{ display:inline-flex; align-items:center; gap:6px; font-size:11px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; color:#6B7F72; background:rgba(107,127,114,0.12); padding:5px 11px; border-radius:20px; margin-bottom:14px; }
+  .status-pill .dot{ width:6px; height:6px; border-radius:50%; background:#6B7F72; }
+  .project-card.placeholder{ border-style:dashed; color:#8a958f; display:flex; align-items:center; justify-content:center; text-align:center; font-size:14px; }
+
+  /* Bagliore che segue il cursore nella hero — effetto solo desktop (nessun hover su mobile,
+     quindi lì semplicemente non appare: nessun danno, nessun costo). */
+  .hero-glow{ position:absolute; width:480px; height:480px; border-radius:50%; pointer-events:none; z-index:0;
+    background:radial-gradient(circle, rgba(107,127,114,0.32), transparent 70%); filter:blur(30px);
+    opacity:0; transition:opacity .4s ease; transform:translate(-50%,-50%); top:0; left:0; }
+  .hero-track:hover .hero-glow{ opacity:1; }
+
+  /* "Radice che cresce" — effetto firma legato al nome RADIX: le linee si disegnano da sole
+     quando la sezione entra nello schermo (funziona identico su mobile, è legato allo scroll,
+     non al mouse, e succede una sola volta: nessuna animazione continua). */
+  .root-draw{ fill:none; stroke:#6B7F72; stroke-width:2.5; stroke-linecap:round;
+    stroke-dasharray:1000; stroke-dashoffset:1000; transition:stroke-dashoffset 2.1s cubic-bezier(.3,.7,.2,1); }
+  .root-draw-2{ stroke:#8c9a6a; stroke-width:2; transition-delay:.3s; }
+  .root-draw-3{ stroke:#b98a52; stroke-width:1.6; transition-delay:.6s; }
+  .is-visible .root-draw{ stroke-dashoffset:0; }
+
+  /* Contatti */
+  .contact-grid{ display:grid; grid-template-columns:1.05fr 1fr; gap:60px; align-items:start; }
+  .contact-paths{ display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; margin-top:40px; }
+  .contact-path-card{ border:1px solid rgba(237,230,222,0.16); border-radius:16px; padding:26px; }
+  .contact-card{ position:relative; z-index:1; background:rgba(255,255,255,0.03); border:1px solid rgba(237,230,222,0.14); border-radius:20px; padding:36px; }
+  .contact-field{ display:flex; flex-direction:column; gap:8px; margin-bottom:16px; }
+  .contact-field label{ font-size:11.5px; letter-spacing:0.09em; text-transform:uppercase; color:#93a698; font-weight:600; }
+  .contact-field input, .contact-field textarea{ font-family:'Inter',sans-serif; font-size:14.5px; color:#FAF9F6;
+    background:rgba(255,255,255,0.05); border:1px solid rgba(237,230,222,0.18); border-radius:9px; padding:13px 16px;
+    outline:none; transition:border-color .2s ease, background .2s ease; resize:vertical; box-sizing:border-box; width:100%; }
+  .contact-field input:focus, .contact-field textarea:focus{ border-color:rgba(107,127,114,0.75); background:rgba(255,255,255,0.08); }
+  .contact-field input::placeholder, .contact-field textarea::placeholder{ color:#5f6e66; }
+  .contact-direct{ display:inline-flex; align-items:center; gap:12px; margin-top:26px; font-size:16px; font-weight:700; color:#EDE6DE; }
+  .contact-direct:hover{ color:#EDE6DE; opacity:0.82; }
+  .contact-note{ font-size:11.5px; color:#5f6e66; margin-top:14px; text-align:center; line-height:1.5; }
+
+  /* Rispetta la preferenza di sistema "riduci le animazioni": via le animazioni continue e le
+     transizioni, contenuti sempre visibili senza dover aspettare un effetto per leggerli. */
+  @media (prefers-reduced-motion: reduce){
+    .reveal{ animation:none !important; opacity:1 !important; }
+    .reveal-section, .reveal-child{ transition:none !important; opacity:1 !important; transform:none !important; }
+    .float, .marquee-track, .spin-slow, .fixed-cta{ animation:none !important; }
+    .hero-glow{ transition:none !important; }
+    .root-draw{ transition:none !important; stroke-dashoffset:0 !important; }
+    .card, .card:hover, .step, .step:hover{ transition:none !important; transform:none !important; }
+  }
+
+  /* Sotto ~760px i layout a griglia fissa e i titoli ruotati/indentati (pensati per schermi
+     larghi) si accavallano invece di leggersi come un effetto voluto: qui li semplifichiamo. */
+  @media (max-width: 760px){
+    .kinetic-1, .kinetic-2, .kinetic-3{ transform:none; margin-left:0; }
+    .servizi-grid{ grid-template-columns:1fr; }
+    .metodo-grid{ grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:28px; }
+    .metodo-line{ display:none; }
+    .nav-links-desktop{ display:none !important; }
+    [style*="64px"]{ padding-left:22px !important; padding-right:22px !important; }
+    .contact-grid{ grid-template-columns:1fr; gap:32px; }
+    .contact-card{ padding:26px; }
+    .contact-paths{ grid-template-columns:1fr; }
+    .audience-grid{ grid-template-columns:1fr; }
+    .projects-grid{ grid-template-columns:1fr; }
+  }
+
+</style>
+</head>
+<body>
+<div style="width: 100%; box-sizing: border-box; display: flex; flex-direction: column; position:relative;">
+
+  <div class="grain"></div>
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- NAV -->
+  <div style="width:100%; box-sizing:border-box; padding:26px 64px; display:flex; align-items:center; justify-content:space-between; background:#0F2D24; position:relative; z-index:5;">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <img src="assets/logo.png" style="width:36px; height:36px; border-radius:9px; display:block;">
+      <div style="display:flex; flex-direction:column; line-height:1.1;">
+        <span style="font-family:'Montserrat',sans-serif; font-weight:700; font-size:17px; letter-spacing:0.06em; color:#FAF9F6;">RADIX</span>
+        <span style="font-size:9.5px; letter-spacing:0.14em; text-transform:uppercase; color:#8ea298; font-weight:500;">Venture &amp; Innovation Studio</span>
+      </div>
+    </div>
+    <div style="display:flex; align-items:center; gap:22px;">
+      <div class="nav-links-desktop" style="display:flex; align-items:center; gap:22px;">
+        <a href="#approccio" class="navlink">Il nostro approccio</a>
+        <a href="#servizi" class="navlink">Competenze</a>
+        <a href="#metodo" class="navlink">Metodo</a>
+        <a href="#progetti" class="navlink">Progetti</a>
+        <a href="#contatti" class="navlink">Contatti</a>
+      </div>
+      <a href="mailto:ilari.france@gmail.com" style="color:#EDE6DE; font-size:14px; font-weight:600; border:1px solid rgba(237,230,222,0.35); padding:10px 20px; border-radius:8px; white-space:nowrap;">Scrivici</a>
+    </div>
+  </div>
+
+  <!-- HERO -->
+  <div class="hero-track" style="width:100%; box-sizing:border-box; padding:110px 64px 0; display:flex; align-items:center; justify-content:space-between; gap:40px; background:radial-gradient(1200px 620px at 15% -15%, rgba(107,127,114,0.24), transparent 60%), linear-gradient(180deg,#0F2D24 0%, #0c261e 100%); flex-wrap:wrap; overflow:hidden; position:relative;">
+    <div class="hero-glow"></div>
+    <div style="flex:1 1 520px; min-width:300px; display:flex; flex-direction:column; align-items:flex-start; gap:22px; padding-bottom:90px; position:relative; z-index:2;">
+      <span class="reveal" style="animation-delay:0s; font-size:13px; letter-spacing:0.16em; text-transform:uppercase; color:#93a698; font-weight:600;">Venture &amp; Innovation Studio</span>
+      <h1 class="reveal hero-title" style="animation-delay:.1s; font-size:clamp(42px,5.6vw,68px); font-weight:800; color:#FAF9F6; max-width:640px; line-height:1.08; letter-spacing:-0.01em;">Le idee hanno bisogno di radici.</h1>
+      <div class="reveal" style="animation-delay:.22s; font-size:20px; font-weight:700; color:#c7d6cb; max-width:540px; line-height:1.4;">Noi le trasformiamo in imprese, prodotti e opportunità di crescita.</div>
+      <p class="reveal" style="animation-delay:.32s; font-size:17px; line-height:1.65; color:#aebdb5; max-width:520px; margin:0;">RADIX è uno studio che sviluppa nuove iniziative imprenditoriali, costruisce prodotti digitali basati sull'intelligenza artificiale e mette competenze di marketing e tecnologia al servizio della crescita.</p>
+      <div class="reveal" style="animation-delay:.42s; display:flex; gap:16px; margin-top:10px; flex-wrap:wrap;">
+        <a href="mailto:ilari.france@gmail.com?subject=Parliamo%20del%20mio%20progetto" class="cta-primary">Parliamo del tuo progetto</a>
+        <a href="#approccio" class="cta-ghost">Scopri cosa facciamo</a>
+      </div>
+    </div>
+    <div class="reveal" style="animation-delay:.5s; flex:0 0 auto; position:relative; z-index:2; margin-top:20px;">
+      <div style="position:relative; width:260px; height:330px;">
+        <div style="position:absolute; inset:-40px; background:radial-gradient(circle, rgba(107,127,114,0.35), transparent 70%); filter:blur(10px); animation:glowPulse 4s ease-in-out infinite;"></div>
+        <img class="float" src="assets/hero-portrait.png" style="position:absolute; right:0; top:0; width:230px; height:auto; display:block; border-radius:28px; box-shadow:0 30px 60px rgba(0,0,0,0.5);">
+        <div style="position:absolute; left:-18px; bottom:-6px; width:108px; height:108px; background:#EDE6DE; border-radius:50%; box-shadow:0 18px 38px rgba(0,0,0,0.4); display:flex; align-items:center; justify-content:center;">
+          <svg viewBox="0 0 108 108" class="spin-slow" style="width:100%; height:100%; position:absolute; inset:0;">
+            <defs><path id="ring1" d="M 54,54 m -40,0 a 40,40 0 1,1 80,0 a 40,40 0 1,1 -80,0"/></defs>
+            <text font-size="8.6" letter-spacing="1.6" fill="#0F2D24" font-family="Montserrat, sans-serif" font-weight="700">
+              <textPath href="#ring1">RADIX • VENTURE STUDIO • RADIX • VENTURE STUDIO • </textPath>
+            </text>
+          </svg>
+          <div style="width:30px; height:30px; border-radius:8px; overflow:hidden; position:relative;">
+            <img src="assets/logo.png" style="width:100%; height:100%; display:block;">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MARQUEE -->
+  <div style="width:100%; overflow:hidden; background:#6B7F72; padding:16px 0; position:relative; z-index:2;">
+    <div class="marquee-track">
+      <span style="display:flex; align-items:center; white-space:nowrap; font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.08em; color:#0F2D24; text-transform:uppercase;">
+        Dalle idee, imprese.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; From ideas to businesses.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Build what's next.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Ideas. Technology. Growth.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+      </span>
+      <span style="display:flex; align-items:center; white-space:nowrap; font-family:'Montserrat',sans-serif; font-weight:700; font-size:15px; letter-spacing:0.08em; color:#0F2D24; text-transform:uppercase;">
+        Dalle idee, imprese.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; From ideas to businesses.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Build what's next.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp; Ideas. Technology. Growth.&nbsp;&nbsp;&nbsp;•&nbsp;&nbsp;&nbsp;
+      </span>
+    </div>
+  </div>
+
+  <!-- IL NOSTRO APPROCCIO -->
+  <div id="approccio" class="reveal-section" style="width:100%; box-sizing:border-box; padding:110px 64px; display:flex; gap:70px; background:#FAF9F6; flex-wrap:wrap; align-items:center; position:relative; overflow:hidden;">
+    <svg class="root-svg" viewBox="0 0 600 440" preserveAspectRatio="none" style="position:absolute; inset:0; width:100%; height:100%; z-index:0; opacity:0.55; pointer-events:none;">
+      <path class="root-draw" pathLength="1000" d="M 60 -10 C 40 60, 110 90, 90 170 C 75 240, 150 260, 130 340 C 118 390, 160 405, 150 445"/>
+      <path class="root-draw root-draw-2" pathLength="1000" d="M 90 170 C 130 190, 170 175, 210 220 C 240 255, 230 300, 270 330"/>
+      <path class="root-draw root-draw-3" pathLength="1000" d="M 130 340 C 90 355, 60 380, 20 405"/>
+    </svg>
+    <div class="reveal-child" style="flex:1 1 380px; min-width:280px; position:relative; z-index:1;">
+      <span style="font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:#6B7F72; font-weight:700;">Il nostro approccio</span>
+      <p style="font-size:28px; line-height:1.45; color:#1F1F1F; margin:18px 0 0; font-weight:600; max-width:560px;">Non ci limitiamo a immaginare il futuro. Lo costruiamo.</p>
+      <p style="font-size:16px; line-height:1.7; color:#5a655f; margin-top:20px; max-width:520px;">RADIX nasce dall'incontro tra visione imprenditoriale, tecnologia e capacità di portare le idee sul mercato.</p>
+      <p style="font-size:16px; line-height:1.7; color:#5a655f; margin-top:14px; max-width:520px;">Sviluppiamo nuove iniziative imprenditoriali e realizziamo prodotti digitali. Mettiamo inoltre le nostre competenze a disposizione di aziende e imprenditori che vogliono innovare, lanciare nuovi progetti o accelerare la propria crescita.</p>
+      <p style="font-size:14.5px; font-weight:700; letter-spacing:0.02em; color:#0F2D24; margin-top:22px;">Dall'idea al prodotto. Dal prodotto al mercato.</p>
+    </div>
+    <div class="reveal-child" style="flex:1 1 320px; min-width:280px; display:flex; justify-content:center; position:relative; z-index:1;">
+      <div style="position:relative; width:100%; max-width:400px; height:330px;">
+        <div style="position:absolute; top:6px; left:0; width:78%;">
+          <img src="assets/approccio-1.png" style="width:100%; height:auto; display:block; border-radius:20px; box-shadow:0 24px 50px rgba(15,45,36,0.2); transform:rotate(-4deg);">
+        </div>
+        <div style="position:absolute; right:0; bottom:0; width:38%;">
+          <img src="assets/hero-portrait.png" style="width:100%; height:auto; display:block; border-radius:16px; box-shadow:0 20px 40px rgba(15,45,36,0.3); border:6px solid #FAF9F6; transform:rotate(6deg);">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PER CHI LAVORIAMO -->
+  <div class="reveal-section" style="width:100%; box-sizing:border-box; padding:0 64px 100px; background:#FAF9F6;">
+    <span style="font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:#6B7F72; font-weight:700;">Per chi lavoriamo</span>
+    <div class="audience-grid">
+      <div class="audience-item reveal-child">
+        <h3 style="font-size:16.5px; font-weight:700; color:#0F2D24;">Imprenditori e founder</h3>
+        <p style="font-size:14px; line-height:1.6; color:#5a655f; margin-top:10px;">Che vogliono sviluppare un'idea e trasformarla in un'impresa vera.</p>
+      </div>
+      <div class="audience-item reveal-child">
+        <h3 style="font-size:16.5px; font-weight:700; color:#0F2D24;">Aziende</h3>
+        <p style="font-size:14px; line-height:1.6; color:#5a655f; margin-top:10px;">Che cercano competenze digitali, tecnologiche o di marketing per crescere.</p>
+      </div>
+      <div class="audience-item reveal-child">
+        <h3 style="font-size:16.5px; font-weight:700; color:#0F2D24;">Partner</h3>
+        <p style="font-size:14px; line-height:1.6; color:#5a655f; margin-top:10px;">Interessati a collaborare o a sviluppare nuove iniziative insieme a noi.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SERVIZI -->
+  <div id="servizi" class="reveal-section" style="width:100%; box-sizing:border-box; padding:20px 64px 100px; background:#EDE6DE;">
+    <div style="max-width:680px;">
+      <span style="font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:#6B7F72; font-weight:700;">Le nostre competenze</span>
+      <div style="margin-top:16px; display:flex; flex-direction:column; gap:2px;">
+        <span class="kinetic-line kinetic-1" style="font-weight:800; font-size:clamp(26px,4vw,44px); color:#0F2D24; line-height:1.15;">TRE COMPETENZE.</span>
+        <span class="kinetic-line kinetic-2" style="font-weight:800; font-size:clamp(26px,4vw,44px); color:#0F2D24; line-height:1.15;">UN UNICO STUDIO.</span>
+        <span class="kinetic-line kinetic-3" style="font-weight:800; font-size:clamp(26px,4vw,44px); color:#6B7F72; line-height:1.15;">DALL'IDEA ALLA CRESCITA.</span>
+      </div>
+    </div>
+    <div class="servizi-grid">
+
+      <div class="card reveal-child">
+        <div class="card-num">01</div>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0F2D24" stroke-width="1.6" style="margin-top:10px;"><path d="M12 21V9M12 9c0-3.5-2.5-6-7-6 0 4.5 2.5 7 7 7Zm0 0c0-3.5 2.5-6 7-6 0 4.5-2.5 7-7 7Z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3 style="font-size:19px; font-weight:700; color:#0F2D24; margin-top:16px;">Venture Building</h3>
+        <p style="font-size:14px; font-weight:600; color:#6B7F72; margin-top:8px;">Diamo forma a nuove imprese.</p>
+        <p style="font-size:14.5px; line-height:1.65; color:#4a5650; margin-top:10px;">Ideiamo, validiamo e sviluppiamo nuovi modelli di business. Dall'analisi dell'opportunità alla costruzione del prodotto, fino al lancio sul mercato.</p>
+        <p style="font-size:12.5px; line-height:1.6; color:#7a857f; margin-top:14px; padding-top:12px; border-top:1px dashed rgba(15,45,36,0.15);"><strong style="color:#0F2D24;">Focus:</strong> progetti imprenditoriali propri e collaborazioni con imprenditori.</p>
+      </div>
+
+      <div class="card reveal-child">
+        <div class="card-num">02</div>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0F2D24" stroke-width="1.6" style="margin-top:10px;"><rect x="7" y="7" width="10" height="10" rx="2"/><path d="M7 3v2M12 3v2M17 3v2M7 19v2M12 19v2M17 19v2M3 7h2M3 12h2M3 17h2M19 7h2M19 12h2M19 17h2" stroke-linecap="round"/></svg>
+        <h3 style="font-size:19px; font-weight:700; color:#0F2D24; margin-top:16px;">AI &amp; Apps</h3>
+        <p style="font-size:14px; font-weight:600; color:#6B7F72; margin-top:8px;">Costruiamo prodotti digitali.</p>
+        <p style="font-size:14.5px; line-height:1.65; color:#4a5650; margin-top:10px;">Progettiamo e sviluppiamo applicazioni, piattaforme SaaS e soluzioni basate sull'intelligenza artificiale, trasformando esigenze concrete in strumenti digitali utilizzabili.</p>
+        <p style="font-size:12.5px; line-height:1.6; color:#7a857f; margin-top:14px; padding-top:12px; border-top:1px dashed rgba(15,45,36,0.15);"><strong style="color:#0F2D24;">Focus:</strong> prodotti RADIX e soluzioni digitali per aziende e clienti esterni.</p>
+      </div>
+
+      <div class="card reveal-child">
+        <div class="card-num">03</div>
+        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#0F2D24" stroke-width="1.6" style="margin-top:10px;"><path d="M4 19V13M11 19V7M18 19V10" stroke-linecap="round"/><path d="M3 19h18" stroke-linecap="round"/></svg>
+        <h3 style="font-size:19px; font-weight:700; color:#0F2D24; margin-top:16px;">Marketing</h3>
+        <p style="font-size:14px; font-weight:600; color:#6B7F72; margin-top:8px;">Portiamo i progetti sul mercato.</p>
+        <p style="font-size:14.5px; line-height:1.65; color:#4a5650; margin-top:10px;">Costruiamo identità di marca, strategie di comunicazione e sistemi di acquisizione clienti per dare visibilità ai progetti e sostenerne la crescita.</p>
+        <p style="font-size:12.5px; line-height:1.6; color:#7a857f; margin-top:14px; padding-top:12px; border-top:1px dashed rgba(15,45,36,0.15);"><strong style="color:#0F2D24;">Focus:</strong> supporto ai progetti RADIX e servizi per aziende esterne, tramite un'agenzia dedicata.</p>
+      </div>
+
+    </div>
+    <div class="reveal-child" style="margin-top:36px; padding-top:28px; border-top:1px solid rgba(15,45,36,0.12); display:flex; align-items:center; gap:14px; flex-wrap:wrap;">
+      <span style="font-size:15px; color:#3a453f;">Cerchi un partner per il marketing e la crescita digitale della tua azienda?</span>
+      <a href="mailto:ilari.france@gmail.com?subject=Interessato%20ai%20servizi%20di%20marketing" style="font-size:15px; font-weight:700; color:#0F2D24; text-decoration:underline; text-underline-offset:3px;">Scopri i nostri servizi di agenzia →</a>
+    </div>
+  </div>
+
+  <!-- METODO -->
+  <div id="metodo" class="reveal-section" style="width:100%; box-sizing:border-box; padding:110px 64px; background:#FAF9F6;">
+    <span style="font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:#6B7F72; font-weight:700;">Come lavoriamo</span>
+
+    <div class="metodo-line">
+      <div style="width:14px; height:14px; border-radius:50%; background:#6B7F72; flex:0 0 auto;"></div>
+      <div style="flex:1; height:3px; background:#6B7F72;"></div>
+      <div style="width:14px; height:14px; border-radius:50%; background:#b98a52; flex:0 0 auto;"></div>
+      <div style="flex:1; height:3px; background:#b98a52;"></div>
+      <div style="width:14px; height:14px; border-radius:50%; background:#8c9a6a; flex:0 0 auto;"></div>
+      <div style="flex:1; height:3px; background:#8c9a6a;"></div>
+      <div style="width:14px; height:14px; border-radius:50%; background:#8a5f57; flex:0 0 auto;"></div>
+    </div>
+
+    <div class="metodo-grid">
+
+      <div class="step reveal-child">
+        <div style="font-family:'Montserrat',sans-serif; font-weight:800; font-size:34px; color:#6B7F72;">01</div>
+        <h3 style="font-size:16.5px; font-weight:700; color:#0F2D24; margin-top:12px;">Idea</h3>
+        <p style="font-size:13.5px; line-height:1.6; color:#5a655f; margin-top:8px;">Individuiamo opportunità, analizziamo i bisogni e definiamo cosa vale la pena sviluppare.</p>
+      </div>
+      <div class="step reveal-child">
+        <div style="font-family:'Montserrat',sans-serif; font-weight:800; font-size:34px; color:#b98a52;">02</div>
+        <h3 style="font-size:16.5px; font-weight:700; color:#0F2D24; margin-top:12px;">Validazione</h3>
+        <p style="font-size:13.5px; line-height:1.6; color:#5a655f; margin-top:8px;">Testiamo il problema, il mercato e il modello di business prima di investire nello sviluppo.</p>
+      </div>
+      <div class="step reveal-child">
+        <div style="font-family:'Montserrat',sans-serif; font-weight:800; font-size:34px; color:#8c9a6a;">03</div>
+        <h3 style="font-size:16.5px; font-weight:700; color:#0F2D24; margin-top:12px;">Costruzione</h3>
+        <p style="font-size:13.5px; line-height:1.6; color:#5a655f; margin-top:8px;">Realizziamo il prodotto, definiamo il brand e prepariamo le basi per il lancio.</p>
+      </div>
+      <div class="step reveal-child">
+        <div style="font-family:'Montserrat',sans-serif; font-weight:800; font-size:34px; color:#8a5f57;">04</div>
+        <h3 style="font-size:16.5px; font-weight:700; color:#0F2D24; margin-top:12px;">Crescita</h3>
+        <p style="font-size:13.5px; line-height:1.6; color:#5a655f; margin-top:8px;">Misuriamo i risultati, ottimizziamo il prodotto e sviluppiamo le strategie per raggiungere nuovi clienti.</p>
+      </div>
+
+    </div>
+    <p class="metodo-note">È il metodo che usiamo per le nuove iniziative RADIX — non tutti i servizi dell'agenzia seguono necessariamente questo percorso completo.</p>
+  </div>
+
+  <!-- PROGETTI -->
+  <div id="progetti" class="reveal-section" style="width:100%; box-sizing:border-box; padding:20px 64px 120px; background:#EDE6DE;">
+    <span style="font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:#6B7F72; font-weight:700;">Progetti</span>
+    <p style="font-size:28px; line-height:1.4; color:#0F2D24; margin:16px 0 0; font-weight:700; max-width:600px;">Cosa stiamo costruendo</p>
+    <p style="font-size:15.5px; line-height:1.7; color:#4a5650; margin-top:14px; max-width:560px;">Non raccontiamo solo cosa potremmo fare: mostriamo cosa stiamo effettivamente sviluppando, con lo stato reale di avanzamento.</p>
+    <div class="projects-grid">
+      <div class="project-card reveal-child">
+        <span class="status-pill"><span class="dot"></span>In sviluppo</span>
+        <h3 style="font-size:18px; font-weight:700; color:#0F2D24;">RADIX Agentic Platform</h3>
+        <p style="font-size:14.5px; line-height:1.65; color:#4a5650; margin-top:10px;">La piattaforma interna che orchestra un team di agenti AI — strategist, copywriter, art director, social media manager, sviluppatore — per gestire branding, contenuti e nuove iniziative.</p>
+      </div>
+      <div class="project-card placeholder reveal-child">
+        Altri progetti in arrivo, con lo stesso criterio: solo cose reali, con lo stato dichiarato.
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND MOMENT -->
+  <div class="reveal-section" style="width:100%; box-sizing:border-box; position:relative; padding:150px 64px; display:flex; flex-direction:column; align-items:center; text-align:center; gap:16px; background:#0F2D24; overflow:hidden;">
+    <img src="assets/brand-moment-bg.png" style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0.28;">
+    <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(15,45,36,0.35), #0F2D24 85%);"></div>
+    <div class="reveal-child" style="position:relative; display:flex; flex-direction:column; align-items:center; gap:16px;">
+      <h2 style="font-size:clamp(30px,4.4vw,50px); font-weight:800; color:#FAF9F6; letter-spacing:-0.01em; max-width:800px; line-height:1.25;">Idee che radicano il futuro.</h2>
+      <p style="font-size:16px; color:#c7d6cb; font-weight:600; letter-spacing:0.02em;">Build what's next.</p>
+    </div>
+  </div>
+
+  <!-- CONTATTI -->
+  <div id="contatti" class="reveal-section" style="width:100%; box-sizing:border-box; position:relative; padding:130px 64px; background:#1F1F1F; overflow:hidden;">
+    <img src="assets/contact-watermark.png" style="position:absolute; width:420px; height:auto; opacity:0.05; right:-60px; top:15%; transform:rotate(-8deg);">
+    <div style="position:relative; max-width:1180px; margin:0 auto;">
+      <div class="contact-grid">
+        <div class="reveal-child" style="position:relative; z-index:1;">
+          <span style="font-size:12.5px; letter-spacing:0.14em; text-transform:uppercase; color:#8a9a8f; font-weight:700;">Contatti</span>
+          <h2 style="font-size:clamp(28px,3.6vw,42px); font-weight:800; color:#FAF9F6; max-width:520px; line-height:1.3; margin-top:16px;">Parliamo del tuo progetto</h2>
+
+          <div class="contact-paths">
+            <div class="contact-path-card">
+              <h3 style="font-size:16px; font-weight:700; color:#FAF9F6;">Hai un'idea da sviluppare?</h3>
+              <p style="font-size:13.5px; line-height:1.6; color:#aebdb5; margin-top:8px;">Raccontaci il progetto. Valutiamo insieme opportunità, fattibilità e possibili passi successivi.</p>
+              <a href="mailto:ilari.france@gmail.com?subject=Vorrei%20sviluppare%20un%27idea%20con%20RADIX" style="display:inline-block; margin-top:14px; font-size:14px; font-weight:700; color:#EDE6DE; text-decoration:underline; text-underline-offset:3px;">Parliamo del tuo progetto →</a>
+            </div>
+            <div class="contact-path-card">
+              <h3 style="font-size:16px; font-weight:700; color:#FAF9F6;">Cerchi competenze per la tua azienda?</h3>
+              <p style="font-size:13.5px; line-height:1.6; color:#aebdb5; margin-top:8px;">Se hai bisogno di un prodotto digitale, di una soluzione AI o di un partner per la crescita del tuo business, scopri come possiamo aiutarti.</p>
+              <a href="#servizi" style="display:inline-block; margin-top:14px; font-size:14px; font-weight:700; color:#EDE6DE; text-decoration:underline; text-underline-offset:3px;">Scopri i nostri servizi →</a>
+            </div>
+          </div>
+
+          <a href="mailto:ilari.france@gmail.com" class="contact-direct">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#EDE6DE" stroke-width="1.8"><path d="M3 6h18v12H3z" stroke-linejoin="round"/><path d="m3 6 9 7 9-7" stroke-linejoin="round" stroke-linecap="round"/></svg>
+            ilari.france@gmail.com
+          </a>
+        </div>
+        <div class="reveal-child contact-card">
+          <div class="contact-field">
+            <label for="contactName">Nome</label>
+            <input id="contactName" type="text" placeholder="Come ti chiami?">
+          </div>
+          <div class="contact-field">
+            <label for="contactEmail">Email</label>
+            <input id="contactEmail" type="email" placeholder="tu@azienda.com">
+          </div>
+          <div class="contact-field">
+            <label for="contactMessage">Messaggio</label>
+            <textarea id="contactMessage" rows="4" placeholder="Raccontaci la tua idea in due righe."></textarea>
+          </div>
+          <button type="button" onclick="handleContactSubmit(event)" class="cta-primary" style="border:none; cursor:pointer; width:100%; justify-content:center;">Invia il messaggio</button>
+          <div class="contact-note">Si apre il tuo client email, già pronto per l'invio. I dati che scrivi qui servono solo a comporre quell'email: non vengono salvati né inviati da nessun'altra parte finché non premi tu stesso "invia" dal tuo client di posta.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="width:100%; box-sizing:border-box; padding:36px 64px; display:flex; align-items:center; justify-content:space-between; background:#161616; flex-wrap:wrap; gap:12px;">
+    <span style="font-size:13px; color:#8a8a8a;">© 2026 RADIX — Venture &amp; Innovation Studio</span>
+    <div style="display:flex; gap:24px; flex-wrap:wrap;">
+      <a href="#approccio" style="font-size:13px; color:#9a9a9a;">Approccio</a>
+      <a href="#servizi" style="font-size:13px; color:#9a9a9a;">Competenze</a>
+      <a href="#metodo" style="font-size:13px; color:#9a9a9a;">Metodo</a>
+      <a href="#progetti" style="font-size:13px; color:#9a9a9a;">Progetti</a>
+      <a href="#contatti" style="font-size:13px; color:#9a9a9a;">Contatti</a>
+      <a href="mailto:ilari.france@gmail.com" style="font-size:13px; color:#cfcfcf;">ilari.france@gmail.com</a>
+    </div>
+  </div>
+
+  <a href="mailto:ilari.france@gmail.com" class="fixed-cta" aria-label="Scrivici">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#0F2D24" stroke-width="1.8"><path d="M3 6h18v12H3z" stroke-linejoin="round"/><path d="m3 6 9 7 9-7" stroke-linejoin="round" stroke-linecap="round"/></svg>
+  </a>
+
+</div>
+<script>
+(function () {
+  "use strict";
+
+  function onScroll() {
+    var doc = document.documentElement;
+    var scrollTop = window.scrollY || doc.scrollTop || 0;
+    var height = doc.scrollHeight - doc.clientHeight;
+    var pct = height > 0 ? Math.min(100, (scrollTop / height) * 100) : 0;
+    var bar = document.getElementById("scrollProgress");
+    if (bar) bar.style.width = pct + "%";
+  }
+
+  function onHeroMove(e) {
+    var track = document.querySelector(".hero-track");
+    var glow = track ? track.querySelector(".hero-glow") : null;
+    if (!glow || !track) return;
+    var rect = track.getBoundingClientRect();
+    glow.style.left = (e.clientX - rect.left) + "px";
+    glow.style.top = (e.clientY - rect.top) + "px";
+  }
+
+  window.handleContactSubmit = function (e) {
+    if (e && e.preventDefault) e.preventDefault();
+    var nameEl = document.getElementById("contactName");
+    var emailEl = document.getElementById("contactEmail");
+    var messageEl = document.getElementById("contactMessage");
+    var name = nameEl ? nameEl.value.trim() : "";
+    var email = emailEl ? emailEl.value.trim() : "";
+    var message = messageEl ? messageEl.value.trim() : "";
+    var subject = encodeURIComponent("Nuovo contatto da " + (name || "sito RADIX"));
+    var bodyLines = ["Nome: " + name, "Email: " + email, "", message];
+    var body = encodeURIComponent(bodyLines.join("\n"));
+    window.location.href = "mailto:ilari.france@gmail.com?subject=" + subject + "&body=" + body;
+  };
+
+  document.addEventListener("DOMContentLoaded", function () {
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll(".reveal-section").forEach(function (el) { observer.observe(el); });
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
+
+    var heroTrack = document.querySelector(".hero-track");
+    if (heroTrack) heroTrack.addEventListener("mousemove", onHeroMove);
+  });
+})();
+</script>
+</body>
+</html>
